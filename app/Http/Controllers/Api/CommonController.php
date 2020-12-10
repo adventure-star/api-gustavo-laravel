@@ -220,6 +220,10 @@ class CommonController extends Controller
 
         $project = Project::find($id);
 
+        $result->title = $project->title;
+
+        $result->data = new stdClass();
+
         $project = array(
             'cover_id' => $project->cover_id,
             'intro_id' => $project->intro_id,
@@ -230,7 +234,6 @@ class CommonController extends Controller
         foreach ($project as $key => $value) {
 
             $cover = Board::find($value);
-
 
             if ($key == 'cover_id') {
                 $key = "0";
@@ -245,15 +248,15 @@ class CommonController extends Controller
                 $key = "3";
             }
 
-            $result->$key = new stdClass();
+            $result->data->$key = new stdClass();
 
-            if ($value == null) {
-                continue;
-            }
+            // if ($value == null) {
+            //     continue;
+            // }
 
             $cover = array(
-                'main_id' => $cover->main_id,
-                'sub_id' => $cover->sub_id
+                'main_id' => $cover->main_id ?? null,
+                'sub_id' => $cover->sub_id ?? null
             );
 
             foreach ($cover as $subkey => $subvalue) {
@@ -269,7 +272,7 @@ class CommonController extends Controller
                     $subkey = "sub";
                 }
 
-                $result->$key->$subkey = new stdClass();
+                $result->data->$key->$subkey = new stdClass();
 
                 if ($subvalue == null) {
                     continue;
@@ -321,7 +324,7 @@ class CommonController extends Controller
                     $content->content->answer3 = $answers[2]->content;
                 }
 
-                $result->$key->$subkey = $content;
+                $result->data->$key->$subkey = $content;
 
             }
 
