@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
    Route::get('/project/recent', 'Api\CommonController@recentprojects')->name('common.recent.project.api');
    Route::post('/project/create', 'Api\CommonController@createproject')->name('common.create.project.api');
    Route::get('/project/{id}', 'Api\CommonController@getProjectById')->name('common.get.project.api');
+   Route::put('/project/{id}', 'Api\CommonController@updateproject')->name('common.update.project.api');
 
    // private routes
    Route::middleware('auth:api')->group(function () {

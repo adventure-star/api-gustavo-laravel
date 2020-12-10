@@ -72,6 +72,47 @@ class CommonController extends Controller
     }
     public function createproject(Request $request)
     {
+        $saveresult = $this->datasave($request);
+        $cover_id = $saveresult->cover_id;
+        $intro_id = $saveresult->intro_id;
+        $develop_id = $saveresult->develop_id;
+        $conclusion_id = $saveresult->conclusion_id;
+
+        if ($cover_id !== null || $intro_id !== null || $develop_id !== null || $conclusion_id !== null) {
+            $project = new Project();
+            $project->title = $request->title;
+            $project->cover_id = $cover_id;
+            $project->intro_id = $intro_id;
+            $project->develop_id = $develop_id;
+            $project->conclusion_id = $conclusion_id;
+            $project->save();
+        }
+
+        return json_encode($saveresult);
+    }
+    public function updateproject(Request $request, $id)
+    {
+        $saveresult = $this->datasave($request);
+        $cover_id = $saveresult->cover_id;
+        $intro_id = $saveresult->intro_id;
+        $develop_id = $saveresult->develop_id;
+        $conclusion_id = $saveresult->conclusion_id;
+
+        if ($cover_id !== null || $intro_id !== null || $develop_id !== null || $conclusion_id !== null) {
+            Project::where('id', $id)->update([
+                    'cover_id' => $cover_id,
+                    'intro_id' => $intro_id,
+                    'develop_id' => $develop_id,
+                    'conclusion_id' => $conclusion_id,
+                ]);
+        }
+
+
+        return $id;
+    }
+    public function datasave($request)
+    {
+
         $cover_id = null;
         $intro_id = null;
         $develop_id = null;
@@ -91,7 +132,6 @@ class CommonController extends Controller
                 } else {
                     $field = "sub";
                 }
-
 
                 $type = $data[$field]["type"] ?? null;
 
@@ -201,17 +241,13 @@ class CommonController extends Controller
             }
         }
 
-        if ($cover_id !== null || $intro_id !== null || $develop_id !== null || $conclusion_id !== null) {
-            $project = new Project();
-            $project->title = $request->title;
-            $project->cover_id = $cover_id;
-            $project->intro_id = $intro_id;
-            $project->develop_id = $develop_id;
-            $project->conclusion_id = $conclusion_id;
-            $project->save();
-        }
+        $result = new stdClass();
+        $result->cover_id = $cover_id;
+        $result->intro_id = $intro_id;
+        $result->develop_id = $develop_id;
+        $result->conclusion_id = $conclusion_id;
 
-        return $request;
+        return $result;
     }
 
     public function getProjectById($id)
@@ -249,10 +285,6 @@ class CommonController extends Controller
             }
 
             $result->data->$key = new stdClass();
-
-            // if ($value == null) {
-            //     continue;
-            // }
 
             $cover = array(
                 'main_id' => $cover->main_id ?? null,
@@ -303,7 +335,6 @@ class CommonController extends Controller
                     $content->content->fontsize = $text->fontsize;
                     $content->content->textcolor = $text->textcolor;
                     $content->content->bgcolor = $text->bgcolor;
-
                 }
                 if ($boardpart->inputquestion_id !== null) {
                     $question = $boardpart->inputquestion;
@@ -325,11 +356,8 @@ class CommonController extends Controller
                 }
 
                 $result->data->$key->$subkey = $content;
-
             }
-
         }
         return json_encode($result);
-
     }
 }
