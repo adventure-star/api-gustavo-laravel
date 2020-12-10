@@ -60,6 +60,16 @@ class CommonController extends Controller
         $linkvideos = LinkVideo::all();
         return $linkvideos;
     }
+    public function projects()
+    {
+        $projects = Project::all();
+        return $projects;
+    }
+    public function recentprojects()
+    {
+        $projects = Project::all()->sortByDesc('id')->values()->all();
+        return $projects;
+    }
     public function createproject(Request $request)
     {
         $cover_id = null;
