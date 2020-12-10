@@ -193,6 +193,7 @@ class CommonController extends Controller
 
         if ($cover_id !== null || $intro_id !== null || $develop_id !== null || $conclusion_id !== null) {
             $project = new Project();
+            $project->title = $request->title;
             $project->cover_id = $cover_id;
             $project->intro_id = $intro_id;
             $project->develop_id = $develop_id;

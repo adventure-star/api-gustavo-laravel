@@ -15,6 +15,7 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
             $table->unsignedBigInteger('cover_id')->nullable();
             $table->unsignedBigInteger('intro_id')->nullable();
             $table->unsignedBigInteger('develop_id')->nullable();
