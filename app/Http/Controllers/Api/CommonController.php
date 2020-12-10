@@ -67,7 +67,7 @@ class CommonController extends Controller
     }
     public function recentprojects()
     {
-        $projects = Project::all()->sortByDesc('id')->values()->all();
+        $projects = Project::all()->sortByDesc('id')->values()->take(8);
         return $projects;
     }
     public function createproject(Request $request)
