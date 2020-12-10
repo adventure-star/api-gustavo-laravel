@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
    Route::get('/images/all', 'Api\CommonController@images')->name('common.images.all.api');
    Route::get('/videos/all', 'Api\CommonController@videos')->name('common.videos.all.api');
    Route::get('/texts/all', 'Api\CommonController@texts')->name('common.texts.all.api');
+   Route::get('/animations/all', 'Api\CommonController@animations')->name('common.animations.all.api');
+   Route::get('/presentations/all', 'Api\CommonController@presentations')->name('common.presentations.all.api');
+   Route::get('/linkvideos/all', 'Api\CommonController@linkvideos')->name('common.linkvideos.all.api');
    Route::post('/project/create', 'Api\CommonController@createproject')->name('common.create.project.api');
    Route::get('/project/{id}', 'Api\CommonController@getProjectById')->name('common.get.project.api');
 

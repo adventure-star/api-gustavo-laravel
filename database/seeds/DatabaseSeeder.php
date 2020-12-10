@@ -41,5 +41,28 @@ class DatabaseSeeder extends Seeder
         DB::table('images')->insert($images);
         DB::table('videos')->insert($videos);
         DB::table('texts')->insert($texts);
+
+        $animations = 
+        [
+            ["id"=>1, "name"=>"anim1", "src"=>"images/girl-1.png", "type"=>"anim"],
+            ["id"=>2, "name"=>"anim2", "src"=>"images/girl-2.png", "type"=>"anim"],
+            ["id"=>3, "name"=>"anim3", "src"=>"images/girl-3.png", "type"=>"anim"],
+        ];
+        $presentations = 
+        [
+            ["id"=>1, "name"=>"pres1", "src"=>"images/add-pres-1.png", "type"=>"presentation"],
+            ["id"=>2, "name"=>"pres2", "src"=>"images/add-pres-2.png", "type"=>"presentation"],
+            ["id"=>3, "name"=>"pres3", "src"=>"images/add-pres-3.png", "type"=>"presentation"],
+        ];
+        $linkvideos = 
+        [
+            ["id"=>1, "name"=>"link1", "src"=>"images/add-link-1.png", "type"=>"linkvideo"],
+            ["id"=>2, "name"=>"link2", "src"=>"images/add-link-2.png", "type"=>"linkvideo"],
+            ["id"=>3, "name"=>"link3", "src"=>"images/add-link-3.png", "type"=>"linkvideo"],
+        ];
+
+        DB::table('animations')->insert($animations);
+        DB::table('presentations')->insert($presentations);
+        DB::table('linkvideos')->insert($linkvideos);
     }
 }
