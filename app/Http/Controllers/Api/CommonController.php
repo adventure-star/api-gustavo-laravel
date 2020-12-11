@@ -93,6 +93,7 @@ class CommonController extends Controller
     public function updateproject(Request $request, $id)
     {
         $saveresult = $this->datasave($request);
+        $title = $request->title;
         $cover_id = $saveresult->cover_id;
         $intro_id = $saveresult->intro_id;
         $develop_id = $saveresult->develop_id;
@@ -100,15 +101,16 @@ class CommonController extends Controller
 
         if ($cover_id !== null || $intro_id !== null || $develop_id !== null || $conclusion_id !== null) {
             Project::where('id', $id)->update([
-                    'cover_id' => $cover_id,
-                    'intro_id' => $intro_id,
-                    'develop_id' => $develop_id,
-                    'conclusion_id' => $conclusion_id,
-                ]);
+                'title' => $title,
+                'cover_id' => $cover_id,
+                'intro_id' => $intro_id,
+                'develop_id' => $develop_id,
+                'conclusion_id' => $conclusion_id,
+            ]);
         }
 
 
-        return $id;
+        return $request;
     }
     public function datasave($request)
     {
