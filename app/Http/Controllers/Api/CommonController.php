@@ -3,25 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Lesson;
 use App\Model\Base\Animation;
 use App\Model\Base\Image as Image;
 use App\Model\Base\LinkVideo;
 use App\Model\Base\Presentation;
 use App\Model\Base\Text;
 use App\Model\Base\Video;
-use App\Model\Board;
-use App\Model\Input\InputAnswer;
-use App\Model\Input\InputImage;
-use App\Model\Input\InputQuestion;
-use App\Model\Input\InputText;
-use App\Model\Input\InputVideo;
-use App\Model\PartBoard;
-use App\Model\Project;
+use App\Model\Lesson;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Mockery\Undefined;
-use stdClass;
 
 class CommonController extends Controller
 {
@@ -58,17 +47,17 @@ class CommonController extends Controller
         $linkvideos = LinkVideo::all();
         return $linkvideos;
     }
-    public function projects()
+    public function lessons()
     {
-        $projects = Project::all();
+        $projects = Lesson::all();
         return $projects;
     }
-    public function recentprojects()
+    public function recentLessons()
     {
         $lessons = Lesson::all()->sortByDesc('id')->values()->take(8);
         return $lessons;
     }
-    public function createproject(Request $request) {
+    public function createLesson(Request $request) {
 
         $lesson = new Lesson();
         $lesson->content = json_encode($request->all());
@@ -77,12 +66,12 @@ class CommonController extends Controller
         return $request->all();
 
     }
-    public function updateproject(Request $request, $id)
+    public function updateLesson(Request $request, $id)
     {
         Lesson::where('id', $id)->update(['content' => json_encode($request->all())]);
         return $request;
     }
-    public function getProjectById($id)
+    public function getLessonById($id)
     {
         $lesson = Lesson::find($id);
         return $lesson;
