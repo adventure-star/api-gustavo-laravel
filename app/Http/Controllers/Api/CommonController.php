@@ -92,6 +92,11 @@ class CommonController extends Controller
     }
     public function updateproject(Request $request, $id)
     {
+        $original = Project::find($id);
+
+        $delete_ids = [$original->cover_id, $original->intro_id, $original->develop_id, $original->develop_id, $original->conclusion_id];
+        Board::whereIn('id', $delete_ids)->delete();
+
         $saveresult = $this->datasave($request);
         $title = $request->title;
         $cover_id = $saveresult->cover_id;
