@@ -20,7 +20,10 @@ class CreateInputTextsTable extends Migration
             $table->string('fontsize')->nullable();
             $table->string('textcolor')->nullable();
             $table->string('bgcolor')->nullable();
+            $table->unsignedBigInteger('board_part_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('board_part_id')->references('id')->on('board_parts')->onDelete('cascade');
         });
     }
 

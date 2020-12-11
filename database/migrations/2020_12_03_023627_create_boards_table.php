@@ -18,9 +18,6 @@ class CreateBoardsTable extends Migration
             $table->unsignedBigInteger('main_id')->nullable();
             $table->unsignedBigInteger('sub_id')->nullable();
             $table->timestamps();
-
-            $table->foreign('main_id')->references('id')->on('board_parts')->onDelete('cascade');
-            $table->foreign('sub_id')->references('id')->on('board_parts')->onDelete('cascade');
         });
     }
 

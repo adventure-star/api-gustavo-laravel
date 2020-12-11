@@ -21,11 +21,6 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('develop_id')->nullable();
             $table->unsignedBigInteger('conclusion_id')->nullable();
             $table->timestamps();
-
-            $table->foreign('cover_id')->references('id')->on('boards')->onDelete('cascade');
-            $table->foreign('intro_id')->references('id')->on('boards')->onDelete('cascade');
-            $table->foreign('develop_id')->references('id')->on('boards')->onDelete('cascade');
-            $table->foreign('conclusion_id')->references('id')->on('boards')->onDelete('cascade');
         });
     }
 

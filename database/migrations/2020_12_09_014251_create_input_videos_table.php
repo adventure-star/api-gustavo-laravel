@@ -16,9 +16,11 @@ class CreateInputVideosTable extends Migration
         Schema::create('input_videos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('video_id');
+            $table->unsignedBigInteger('board_part_id')->nullable();
             $table->timestamps();
 
             $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
+            $table->foreign('board_part_id')->references('id')->on('board_parts')->onDelete('cascade');
         });
     }
 

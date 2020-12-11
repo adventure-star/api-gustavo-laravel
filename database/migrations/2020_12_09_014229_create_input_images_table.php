@@ -16,9 +16,11 @@ class CreateInputImagesTable extends Migration
         Schema::create('input_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('board_part_id')->nullable();
             $table->timestamps();
 
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+            $table->foreign('board_part_id')->references('id')->on('board_parts')->onDelete('cascade');
         });
     }
 

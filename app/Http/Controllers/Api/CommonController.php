@@ -153,8 +153,8 @@ class CommonController extends Controller
                             $boardpart = new PartBoard();
                             $boardpart->inputimage_id = $image->id;
                             $boardpart->save();
+                            InputImage::where('id', $image->id)->update(['board_part_id' => $boardpart->id]);
                             $field_id = $boardpart->id;
-
                             break;
                         }
                     case "video": {
@@ -164,6 +164,7 @@ class CommonController extends Controller
                             $boardpart = new PartBoard();
                             $boardpart->inputvideo_id = $video->id;
                             $boardpart->save();
+                            InputVideo::where('id', $video->id)->update(['board_part_id' => $boardpart->id]);
                             $field_id = $boardpart->id;
                             break;
                         }
@@ -180,6 +181,7 @@ class CommonController extends Controller
                                         $boardpart = new PartBoard();
                                         $boardpart->inputtext_id = $text->id;
                                         $boardpart->save();
+                                        InputText::where('id', $text->id)->update(['board_part_id' => $boardpart->id]);
                                         $field_id = $boardpart->id;
                                         break;
                                     }
@@ -194,6 +196,7 @@ class CommonController extends Controller
                                         $boardpart = new PartBoard();
                                         $boardpart->inputquestion_id = $question->id;
                                         $boardpart->save();
+                                        InputQuestion::where('id', $question->id)->update(['board_part_id' => $boardpart->id]);
                                         $field_id = $boardpart->id;
                                         $inputanswer1 = new InputAnswer();
                                         $inputanswer1->question_id = $question->id;
@@ -225,6 +228,8 @@ class CommonController extends Controller
                 $board->main_id = $main_id;
                 $board->sub_id = $sub_id;
                 $board->save();
+                PartBoard::where('id', $main_id)->update(['board_id' => $board->id]);
+                PartBoard::where('id', $sub_id)->update(['board_id' => $board->id]);
 
                 switch ($totalindex) {
                     case 0:

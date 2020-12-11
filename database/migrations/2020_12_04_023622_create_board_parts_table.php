@@ -19,12 +19,10 @@ class CreateBoardPartsTable extends Migration
             $table->unsignedBigInteger('inputvideo_id')->nullable();
             $table->unsignedBigInteger('inputtext_id')->nullable();
             $table->unsignedBigInteger('inputquestion_id')->nullable();
+            $table->unsignedBigInteger('board_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('inputimage_id')->references('id')->on('input_images')->onDelete('cascade');
-            $table->foreign('inputvideo_id')->references('id')->on('input_videos')->onDelete('cascade');
-            $table->foreign('inputtext_id')->references('id')->on('input_texts')->onDelete('cascade');
-            $table->foreign('inputquestion_id')->references('id')->on('input_questions')->onDelete('cascade');
+            $table->foreign('board_id')->references('id')->on('boards')->onDelete('cascade');
         });
     }
 
