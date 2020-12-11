@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInputAnswersTable extends Migration
+class CreateLessonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateInputAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('input_answers', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('question_id');
-            $table->string('content')->nullable();
+            $table->string('content');
             $table->timestamps();
-
-            $table->foreign('question_id')->references('id')->on('input_questions')->onDelete('cascade');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateInputAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('input_answers');
+        Schema::dropIfExists('lessons');
     }
 }
