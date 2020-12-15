@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Route;
    Route::get('/lesson/{id}', 'Api\CommonController@getLessonById')->name('common.get.lesson.api');
    Route::put('/lesson/{id}', 'Api\CommonController@updateLesson')->name('common.update.lesson.api');
 
+   Route::post('/lesson/historycreate', 'Api\CommonController@createLessonHistory')->name('common.create.lessonhistory.api');
+   Route::get('/lesson/recenthistory', 'Api\CommonController@getLessonHistory')->name('common.recent.lessonhistory.api');
+
+
    // private routes
    Route::middleware('auth:api')->group(function () {
        Route::get('/logout', 'Api\AuthController@logout')->name('logout');

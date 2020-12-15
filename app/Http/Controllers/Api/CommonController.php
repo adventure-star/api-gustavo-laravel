@@ -10,6 +10,7 @@ use App\Model\Base\Presentation;
 use App\Model\Base\Text;
 use App\Model\Base\Video;
 use App\Model\Lesson;
+use App\Model\LessonHistory;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
@@ -75,5 +76,19 @@ class CommonController extends Controller
     {
         $lesson = Lesson::find($id);
         return $lesson;
+    }
+    public function createLessonHistory(Request $request) {
+
+        $history = new LessonHistory();
+        $history->lesson_id = $request->id;
+        $history->content = json_encode($request->all());
+        $history->save();
+
+        return $request->all();
+
+    }
+    public function getLessonHistory() {
+        $history = LessonHistory::all()->sortBy('id')->values()->take(8);
+        return $history;
     }
 }
